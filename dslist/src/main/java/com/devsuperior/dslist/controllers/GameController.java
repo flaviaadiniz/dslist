@@ -11,7 +11,11 @@ import java.util.List;
 @RequestMapping(value = "/games")
 public class GameController {
 
-    private GameService gameService;
+    private final GameService gameService;
+
+    public GameController(GameService gameService) {
+        this.gameService = gameService;
+    }
 
     @GetMapping(value = "/{id}")
     public GameDTO findById(@PathVariable Long id) {
