@@ -2,6 +2,7 @@ package com.devsuperior.dslist.controllers;
 
 import com.devsuperior.dslist.dto.GameDTO;
 import com.devsuperior.dslist.dto.GameMinDTO;
+import com.devsuperior.dslist.entities.Game;
 import com.devsuperior.dslist.services.GameService;
 import org.springframework.web.bind.annotation.*;
 
@@ -26,6 +27,13 @@ public class GameController {
     public List<GameMinDTO> findAll() {
         List<GameMinDTO> result = gameService.findAll();
         return result;
+    }
+
+    @PostMapping
+    public GameDTO add(@RequestBody Game body) {
+        GameDTO gameDTO = new GameDTO(body);
+        gameService.add(body);
+        return gameDTO;
     }
 
 }

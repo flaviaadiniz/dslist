@@ -38,4 +38,7 @@ public class GameService {
         return games.stream().map(x -> new GameMinDTO(x)).toList();
     }
 
+    public Game add(Game body) {
+        return gameRepository.save(body);
+    }
 }
