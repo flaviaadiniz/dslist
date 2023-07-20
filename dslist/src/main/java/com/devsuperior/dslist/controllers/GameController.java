@@ -36,4 +36,9 @@ public class GameController {
         return gameDTO;
     }
 
+    @GetMapping(value = "/search")
+    public List<GameMinDTO> findGameByYear(@RequestParam (name = "game_year") Integer gameYear) {
+        return gameService.findGameByYear(gameYear);
+    }
+
 }

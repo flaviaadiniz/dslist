@@ -41,4 +41,10 @@ public class GameService {
     public Game add(Game body) {
         return gameRepository.save(body);
     }
+
+    @Transactional(readOnly = true)
+    public List<GameMinDTO> findGameByYear(Integer gameYear) {
+        List<Game> result = gameRepository.findGameByYear(gameYear);
+        return result.stream().map(x -> new GameMinDTO(x)).toList();
+    }
 }
