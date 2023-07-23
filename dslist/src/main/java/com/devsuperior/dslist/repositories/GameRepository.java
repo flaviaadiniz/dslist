@@ -1,7 +1,5 @@
 package com.devsuperior.dslist.repositories;
 
-import com.devsuperior.dslist.dto.GameDTO;
-import com.devsuperior.dslist.dto.GameMinDTO;
 import com.devsuperior.dslist.entities.Game;
 import com.devsuperior.dslist.projections.GameMinProjection;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -22,7 +20,6 @@ public interface GameRepository extends JpaRepository<Game, Long> {
 			""")
 	List<GameMinProjection> searchByList(Long listId);
 
-
-	//@Query("SELECT * FROM tb_game WHERE game_year = :gameYear")
+	@Query(nativeQuery = true, value = "SELECT * FROM tb_game WHERE game_year = :gameYear")
 	List<Game> findGameByYear(Integer gameYear);
 }
