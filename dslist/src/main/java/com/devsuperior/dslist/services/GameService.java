@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
 @Service
 public class GameService {
@@ -21,9 +22,13 @@ public class GameService {
 
     @Transactional(readOnly = true)
     public GameDTO findById(Long id) {
-        Game result = gameRepository.findById(id).get();
-        //fazer tratamento de exceção para quando o ID não existir
-        return new GameDTO(result);
+        try {
+            Game result = gameRepository.findById(id).get();
+            return new GameDTO(result);
+        } catch (NoSuchElementException elementException) {
+            System.out.println("There's no game with the ID provided.");
+            return null;
+        }
     }
 
     @Transactional(readOnly = true)
